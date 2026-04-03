@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Upload Test</h2>
+
+<input type="file" id="file" />
+<button onclick="uploadFile()">Upload</button>
+
+<script>
+async function uploadFile() {
+  const file = document.getElementById("file").files[0];
+
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const res = await fetch("http://localhost:3000/upload", {
+    method: "POST",
+    body: formData
+  });
+
+  const data = await res.json();
+  console.log(data);
+
+  alert("Uploaded: " + data.url);
+}
+</script>
+
+</body>
+</html>
